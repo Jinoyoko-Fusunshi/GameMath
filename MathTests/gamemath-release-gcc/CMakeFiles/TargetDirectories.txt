@@ -1,0 +1,3 @@
+/home/jinoyoko/Repos/GameMath/MathTests/gamemath-release-gcc/CMakeFiles/MathTests.dir
+/home/jinoyoko/Repos/GameMath/MathTests/gamemath-release-gcc/CMakeFiles/edit_cache.dir
+/home/jinoyoko/Repos/GameMath/MathTests/gamemath-release-gcc/CMakeFiles/rebuild_cache.dir
