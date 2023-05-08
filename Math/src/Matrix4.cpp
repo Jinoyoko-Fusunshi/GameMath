@@ -81,4 +81,17 @@ template<FloatType N> Matrix4<N> Matrix4<N>::operator*(Matrix4<N> other) {
     return product;
 }
 
+template<FloatType N> float Matrix4<N>::operator[](uint32_t index) {
+    return elements[index];
+}
+
+template<FloatType N> bool Matrix4<N>::operator==(Matrix4<N> other) {
+    for (uint8_t i = 0; i < MatrixDimension * MatrixDimension; i++) {
+        if (elements[i] != other[i])
+            return false;
+    }
+
+    return true;
+}
+
 template class Matrix4<float>;

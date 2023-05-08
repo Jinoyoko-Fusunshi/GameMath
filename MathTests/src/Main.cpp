@@ -4,5 +4,5 @@ using testing::InitGoogleTest;
 
 int main() {
     InitGoogleTest();
-    RUN_ALL_TESTS();
+    int status = RUN_ALL_TESTS();
 }

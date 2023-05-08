@@ -23,6 +23,8 @@ public:
     static Matrix4<N> CreateProjectionMatrix(N fov, N near_distance, N far_distance);
 
     Matrix4<N> operator *(Matrix4<N> other);
+    float operator[](uint32_t index);
+    bool operator==(Matrix4<N> other);
 };
 
 typedef Matrix4<float> Matrix4F;
