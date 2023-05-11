@@ -13,7 +13,6 @@ private:
 public:
     Matrix4() = default;
     explicit Matrix4(N *elements);
-    explicit Matrix4(Vector3F column_one, Vector3F column_two, Vector3F column_three, Vector3F column_four);
     ~Matrix4() = default;
 
     N* GetElements() { return elements; }

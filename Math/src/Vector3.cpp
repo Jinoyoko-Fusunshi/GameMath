@@ -1,12 +1,5 @@
 #include "Vector3.hpp"
 
-template<FloatType N>
-Vector3<N> Vector3<N>::AsNegated() {
-    Vector3<N> scalar_product = *this * -1.0;
-    return scalar_product;
-}
-
-
 template<FloatType N> Vector3<N> Vector3<N>::operator-(Vector3<N> other) {
     return Vector3<N>(this->x - other.x, this->y - other.y, this->z - other.z);
 }

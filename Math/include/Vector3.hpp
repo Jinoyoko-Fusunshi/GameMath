@@ -13,9 +13,7 @@ public:
     explicit Vector3(N x, N y, N z) : Vector2<N>(x, y), z(z) {}
     ~Vector3() = default;
 
-    N GetZ() { return z; }
-
-    Vector3<N> AsNegated();
+    N GetZ() const { return z; }
 
     Vector3<N> operator +(Vector3<N> other);
     void operator +=(Vector3<N> other);
