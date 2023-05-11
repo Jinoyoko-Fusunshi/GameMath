@@ -13,8 +13,8 @@ public:
     explicit Vector2(N x, N y) : x(x), y(y) {}
     ~Vector2() = default;
 
-    N GetX() { return x; }
-    N GetY() { return y; }
+    N GetX() const { return x; }
+    N GetY() const { return y; }
 
     Vector2<N> operator +(Vector2<N> other);
     void operator +=(Vector2<N> other);

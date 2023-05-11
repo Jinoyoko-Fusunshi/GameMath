@@ -15,7 +15,7 @@ public:
     explicit Matrix4(N *elements);
     ~Matrix4() = default;
 
-    N* GetElements() { return elements; }
+    const N* GetElements() const { return elements; }
 
     static Matrix4<N> CreateEmptyMatrix();
     static Matrix4<N> CreateIdentityMatrix();
