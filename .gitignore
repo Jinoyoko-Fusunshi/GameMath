@@ -2,6 +2,7 @@
 /gamemath-release-gcc
 
 # linux binaries
+lib
 bin
 .o, .so, .a
 
