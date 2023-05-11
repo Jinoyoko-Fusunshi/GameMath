@@ -1,2 +1,9 @@
 /gamemath-debug-gcc
 /gamemath-release-gcc
+
+# linux binaries
+bin
+.o, .so, .a
+
+# IDE configurations
+.idea
