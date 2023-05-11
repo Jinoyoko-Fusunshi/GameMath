@@ -7,10 +7,10 @@ template<FloatType N> Matrix4<N>::Matrix4(N *elements) {
 
 template<FloatType N> Matrix4<N> Matrix4<N>::CreateEmptyMatrix() {
     N elements[16] = {
-            0.0, 0.0, 0.0, 0.0,
-            0.0, 0.0, 0.0, 0.0,
-            0.0, 0.0, 0.0, 0.0,
-            0.0, 0.0, 0.0, 0.0
+        0.0, 0.0, 0.0, 0.0,
+        0.0, 0.0, 0.0, 0.0,
+        0.0, 0.0, 0.0, 0.0,
+        0.0, 0.0, 0.0, 0.0
     };
 
     return Matrix4<N>(elements);
@@ -27,14 +27,13 @@ template<FloatType N> Matrix4<N> Matrix4<N>::CreateIdentityMatrix() {
     return Matrix4<N>(elements);
 }
 
-template<FloatType N> Matrix4<N> Matrix4<N>::CreateProjectionMatrix(N fov, N near_distance, N far_distance) {
-    N scale = 1.0 / (tan((fov / 2.0) * ((N)M_PI / 180.0)));
-
+template<FloatType N>
+Matrix4<N> Matrix4<N>::CreateTranslationMatrix(Vector3<N> &translation) {
     N elements[MatrixDimension * MatrixDimension] = {
-        scale, 0.0, 0.0, 0.0,
-        0.0, scale, 0.0, 0.0,
-        0.0, 0.0, -(far_distance / (far_distance - near_distance)), -1.0,
-        0.0, 0.0, -((far_distance * near_distance) / (far_distance - near_distance)), 1.0,
+        1.0, 0.0, 0.0, translation.GetX(),
+        0.0, 1.0, 0.0, translation.GetY(),
+        0.0, 0.0, 1.0, translation.GetZ(),
+        0.0, 0.0, 0.0, 1.0
     };
 
     return Matrix4<N>(elements);

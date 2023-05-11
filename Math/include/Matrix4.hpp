@@ -19,7 +19,7 @@ public:
 
     static Matrix4<N> CreateEmptyMatrix();
     static Matrix4<N> CreateIdentityMatrix();
-    static Matrix4<N> CreateProjectionMatrix(N fov, N near_distance, N far_distance);
+    static Matrix4<N> CreateTranslationMatrix(Vector3<N> &translation);
 
     Matrix4<N> operator *(Matrix4<N> other);
     float operator[](uint32_t index);
