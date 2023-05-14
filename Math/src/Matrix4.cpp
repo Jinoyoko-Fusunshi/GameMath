@@ -58,7 +58,22 @@ template<FloatType N> Matrix4<N> Matrix4<N>::operator*(Matrix4<N> other) {
     return product;
 }
 
-template<FloatType N> float Matrix4<N>::operator[](uint32_t index) {
+template<FloatType N>Vector3<N> Matrix4<N>::operator*(Vector3<N> other) {
+    N vector_data[MatrixDimension] { other.GetX(), other.GetY(), other.GetZ(), 1.0 };
+    N product_vector_data[MatrixDimension] { 0.0, 0.0, 0.0, 0.0 };
+
+    for (uint8_t this_row = 0; this_row < MatrixDimension; this_row++) {
+        for (uint8_t this_column = 0; this_column < MatrixDimension; this_column++) {
+            const uint8_t index = this_row * MatrixDimension + this_column;
+
+            product_vector_data[this_row] += vector_data[this_column] * elements[index];
+        }
+    }
+
+    return Vector3<N>(product_vector_data[0], product_vector_data[1], product_vector_data[2]);
+}
+
+template<FloatType N> float Matrix4<N>::operator[](uint8_t index) {
     return elements[index];
 }
 

@@ -13,6 +13,8 @@ public:
     explicit Vector3(N x, N y, N z) : Vector2<N>(x, y), z(z) {}
     ~Vector3() = default;
 
+    N DotProduct(Vector3<N> other);
+
     N GetZ() const { return z; }
 
     static Vector3<N> XUnitVector3() { return Vector3<N>(1.0, 0.0, 0.0); };

@@ -22,7 +22,8 @@ public:
     static Matrix4<N> CreateTranslationMatrix(Vector3<N> &translation);
 
     Matrix4<N> operator *(Matrix4<N> other);
-    float operator[](uint32_t index);
+    Vector3<N> operator *(Vector3<N> other);
+    float operator[](uint8_t index);
     bool operator==(Matrix4<N> other);
 };
 
