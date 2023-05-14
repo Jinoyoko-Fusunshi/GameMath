@@ -5,7 +5,7 @@ template<FloatType N> Matrix4<N>::Matrix4(N *elements) {
         this->elements[i] = elements[i];
 }
 
-template<FloatType N> Matrix4<N> Matrix4<N>::CreateEmptyMatrix() {
+template<FloatType N> Matrix4<N> Matrix4<N>::EmptyMatrix() {
     N elements[16] = {
         0.0, 0.0, 0.0, 0.0,
         0.0, 0.0, 0.0, 0.0,
@@ -16,7 +16,7 @@ template<FloatType N> Matrix4<N> Matrix4<N>::CreateEmptyMatrix() {
     return Matrix4<N>(elements);
 }
 
-template<FloatType N> Matrix4<N> Matrix4<N>::CreateIdentityMatrix() {
+template<FloatType N> Matrix4<N> Matrix4<N>::IdentityMatrix() {
     N elements[16] = {
         1.0, 0.0, 0.0, 0.0,
         0.0, 1.0, 0.0, 0.0,
@@ -27,8 +27,7 @@ template<FloatType N> Matrix4<N> Matrix4<N>::CreateIdentityMatrix() {
     return Matrix4<N>(elements);
 }
 
-template<FloatType N>
-Matrix4<N> Matrix4<N>::CreateTranslationMatrix(Vector3<N> &translation) {
+template<FloatType N> Matrix4<N> Matrix4<N>::TranslationMatrix(Vector3<N> &translation) {
     N elements[MatrixDimension * MatrixDimension] = {
         1.0, 0.0, 0.0, translation.GetX(),
         0.0, 1.0, 0.0, translation.GetY(),
@@ -39,9 +38,53 @@ Matrix4<N> Matrix4<N>::CreateTranslationMatrix(Vector3<N> &translation) {
     return Matrix4<N>(elements);
 }
 
+template<FloatType N> Matrix4<N> Matrix4<N>::XRotationMatrix(Degree<N> angle) {
+    float elements[MatrixDimension * MatrixDimension] = {
+        1.0, 0.0, 0.0, 0.0,
+        0.0, (N)cos(angle.ToRadian()), (N)-sin(angle.ToRadian()), 0.0,
+        0.0, (N)sin(angle.ToRadian()), (N)cos(angle.ToRadian()), 0.0,
+        0.0, 0.0, 0.0, 1.0
+    };
+
+    return Matrix4<N>(elements);
+}
+
+template<FloatType N> Matrix4<N> Matrix4<N>::YRotationMatrix(Degree<N> angle) {
+    float elements[MatrixDimension * MatrixDimension] = {
+        (N)cos(angle.ToRadian()), 0.0, (N)sin(angle.ToRadian()), 0.0,
+        0.0, 1.0, 0.0, 0.0,
+        (N)-sin(angle.ToRadian()), 0.0, (N)cos(angle.ToRadian()), 0.0,
+        0.0, 0.0, 0.0, 1.0
+    };
+
+    return Matrix4<N>(elements);
+}
+
+template<FloatType N> Matrix4<N> Matrix4<N>::ZRotationMatrix(Degree<N> angle) {
+    float elements[MatrixDimension * MatrixDimension] = {
+        (N)cos(angle.ToRadian()), (N)-sin(angle.ToRadian()), 0.0, 0.0,
+        (N)sin(angle.ToRadian()), (N)cos(angle.ToRadian()), 0.0, 0.0,
+        0.0, 0.0, 1.0, 0.0,
+        0.0, 0.0, 0.0, 1.0
+    };
+
+    return Matrix4<N>(elements);
+}
+
+template<FloatType N> Matrix4<N> Matrix4<N>::ProjectionMatrix(float near_distance, float far_distance, float fov) {
+    auto scale = 1.0f / (tanf((fov / 2.0f) * ((float)M_PI / 180.0f)));
+    float elements[MatrixDimension * MatrixDimension] = {
+        scale, 0.0, 0.0, 0.0,
+        0.0, scale, 0.0, 0.0,
+        0.0, 0.0, -(far_distance / (far_distance - near_distance)), -1.0,
+        0.0, 0.0, -((far_distance * near_distance) / (far_distance - near_distance)), 1.0,
+    };
+
+    return Matrix4<N>(elements);
+}
+
 template<FloatType N> Matrix4<N> Matrix4<N>::operator*(Matrix4<N> other) {
-    Matrix4<N> product;
-    product.CreateEmptyMatrix();
+    auto product = EmptyMatrix();
 
     for (uint8_t this_row = 0; this_row < MatrixDimension; this_row++) {
         for (uint8_t other_column = 0; other_column < MatrixDimension; other_column++) {
