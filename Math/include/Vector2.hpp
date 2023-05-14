@@ -16,6 +16,9 @@ public:
     N GetX() const { return x; }
     N GetY() const { return y; }
 
+    static Vector2<N> XUnitVector2() { return Vector2<N>(1.0, 0.0); };
+    static Vector2<N> YUnitVector2() { return Vector2<N>(0.0, 1.0); };
+
     Vector2<N> operator +(Vector2<N> other);
     void operator +=(Vector2<N> other);
 

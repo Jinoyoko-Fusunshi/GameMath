@@ -2,7 +2,7 @@
 #include "Matrix4.hpp"
 
 TEST(Matrix4F, CreateIdentyMatrixIsCorrect) {
-    Matrix4F matrix = Matrix4F::CreateIdentityMatrix();
+    Matrix4F matrix = Matrix4F::IdentityMatrix();
 
     EXPECT_EQ(matrix[0], 1);
     EXPECT_EQ(matrix[1], 0);
@@ -23,10 +23,10 @@ TEST(Matrix4F, CreateIdentyMatrixIsCorrect) {
 }
 
 TEST(Matrix4F, MultiplyIdentityMatricsProductIsCorrect) {
-    Matrix4F matrix_one = Matrix4F::CreateIdentityMatrix();
-    Matrix4F matrix_two = Matrix4F::CreateIdentityMatrix();
+    Matrix4F matrix_one = Matrix4F::IdentityMatrix();
+    Matrix4F matrix_two = Matrix4F::IdentityMatrix();
     Matrix4F matrix_product = matrix_one * matrix_two;
-    Matrix4F expected_matrix_product = Matrix4F::CreateIdentityMatrix();
+    Matrix4F expected_matrix_product = Matrix4F::IdentityMatrix();
 
     EXPECT_TRUE(matrix_product == expected_matrix_product);
 }
