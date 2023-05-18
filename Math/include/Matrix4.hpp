@@ -24,11 +24,11 @@ public:
     static Matrix4<N> XRotationMatrix(Degree<N> angle);
     static Matrix4<N> YRotationMatrix(Degree<N> angle);
     static Matrix4<N> ZRotationMatrix(Degree<N> angle);
-    static Matrix4<N> ProjectionMatrix(float near_distance, float far_distance, float fov);
+    static Matrix4<N> ProjectionMatrix(N near_distance, N far_distance, N fov);
 
     Matrix4<N> operator *(Matrix4<N> other);
     Vector3<N> operator *(Vector3<N> other);
-    float operator[](uint8_t index);
+    N operator[](uint8_t index);
     bool operator==(Matrix4<N> other);
 };
 

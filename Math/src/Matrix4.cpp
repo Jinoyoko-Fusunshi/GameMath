@@ -6,7 +6,7 @@ template<FloatType N> Matrix4<N>::Matrix4(N *elements) {
 }
 
 template<FloatType N> Matrix4<N> Matrix4<N>::EmptyMatrix() {
-    N elements[16] = {
+    N elements[MatrixDimension * MatrixDimension] = {
         0.0, 0.0, 0.0, 0.0,
         0.0, 0.0, 0.0, 0.0,
         0.0, 0.0, 0.0, 0.0,
@@ -17,7 +17,7 @@ template<FloatType N> Matrix4<N> Matrix4<N>::EmptyMatrix() {
 }
 
 template<FloatType N> Matrix4<N> Matrix4<N>::IdentityMatrix() {
-    N elements[16] = {
+    N elements[MatrixDimension * MatrixDimension] = {
         1.0, 0.0, 0.0, 0.0,
         0.0, 1.0, 0.0, 0.0,
         0.0, 0.0, 1.0, 0.0,
@@ -71,9 +71,9 @@ template<FloatType N> Matrix4<N> Matrix4<N>::ZRotationMatrix(Degree<N> angle) {
     return Matrix4<N>(elements);
 }
 
-template<FloatType N> Matrix4<N> Matrix4<N>::ProjectionMatrix(float near_distance, float far_distance, float fov) {
-    auto scale = 1.0f / (tanf((fov / 2.0f) * ((float)M_PI / 180.0f)));
-    float elements[MatrixDimension * MatrixDimension] = {
+template<FloatType N> Matrix4<N> Matrix4<N>::ProjectionMatrix(N near_distance, N far_distance, N fov) {
+    N scale = 1.0 / (tan((fov / 2.0f) * ((N)M_PI / 180.0)));
+    N elements[MatrixDimension * MatrixDimension] = {
         scale, 0.0, 0.0, 0.0,
         0.0, scale, 0.0, 0.0,
         0.0, 0.0, -(far_distance / (far_distance - near_distance)), -1.0,
@@ -116,7 +116,7 @@ template<FloatType N>Vector3<N> Matrix4<N>::operator*(Vector3<N> other) {
     return Vector3<N>(product_vector_data[0], product_vector_data[1], product_vector_data[2]);
 }
 
-template<FloatType N> float Matrix4<N>::operator[](uint8_t index) {
+template<FloatType N> N Matrix4<N>::operator[](uint8_t index) {
     return elements[index];
 }
 
