@@ -1,5 +1,8 @@
+# cmake build files
+
 /gamemath-debug-gcc
 /gamemath-release-gcc
+/build
 
 # linux binaries
 lib
