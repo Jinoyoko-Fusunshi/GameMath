@@ -32,4 +32,6 @@ public:
 };
 
 typedef Degree<float> FDegree;
+typedef Degree<double> DDegree;
 typedef Radian<float> FRadian;
+typedef Radian<double> DRadian;

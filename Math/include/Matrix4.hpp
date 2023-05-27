@@ -33,3 +33,4 @@ public:
 };
 
 typedef Matrix4<float> Matrix4F;
+typedef Matrix4<double> Matrix4D;

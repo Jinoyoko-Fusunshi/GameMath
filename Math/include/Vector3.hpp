@@ -31,6 +31,10 @@ public:
     void operator*=(N factor);
 
     bool operator==(Vector3<N> other);
+
+    template <FloatType M>
+    operator Vector3<M>();
 };
 
 typedef Vector3<float> Vector3F;
+typedef Vector3<double> Vector3D;

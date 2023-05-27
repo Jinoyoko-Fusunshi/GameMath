@@ -141,3 +141,4 @@ bool Matrix4<N>::operator==(Matrix4<N> other) {
 }
 
 template class Matrix4<float>;
+template class Matrix4<double>;

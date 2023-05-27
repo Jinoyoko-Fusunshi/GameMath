@@ -14,4 +14,6 @@ Degree<N> Radian<N>::ToDegree() {
 }
 
 template class Degree<float>;
+template class Degree<double>;
 template class Radian<float>;
+template class Radian<double>;

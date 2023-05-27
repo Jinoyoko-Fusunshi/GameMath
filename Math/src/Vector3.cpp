@@ -46,4 +46,13 @@ bool Vector3<N>::operator==(Vector3<N> other) {
     return this->x == other.x && this->y == other.y && this->z == other.z;
 }
 
+template<FloatType N>
+template<FloatType M>
+Vector3<N>::operator Vector3<M>() {
+    return Vector3<M>(this->x, this->y, this->z);
+}
+
 template class Vector3<float>;
+template class Vector3<double>;
+template Vector3<double>::operator Vector3<float>();
+template Vector3<float>::operator Vector3<double>();
