@@ -11,6 +11,7 @@ protected:
 public:
     Vector3() : Vector2<N>(), z(0) {}
     explicit Vector3(N x, N y, N z) : Vector2<N>(x, y), z(z) {}
+    explicit Vector3(Vector2<N> base_vector, N z) : Vector2<N>(base_vector), z(z) {}
     ~Vector3() = default;
 
     N DotProduct(Vector3<N> other);
@@ -31,6 +32,10 @@ public:
     void operator*=(N factor);
 
     bool operator==(Vector3<N> other);
+
+    template <FloatType M>
+    operator Vector3<M>();
 };
 
 typedef Vector3<float> Vector3F;
+typedef Vector3<double> Vector3D;

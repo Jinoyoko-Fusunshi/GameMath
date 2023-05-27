@@ -1,11 +1,13 @@
 #include "Matrix4.hpp"
 
-template<FloatType N> Matrix4<N>::Matrix4(N *elements) {
+template<FloatType N> 
+Matrix4<N>::Matrix4(N *elements) {
     for (uint16_t i = 0u; i < MatrixDimension * MatrixDimension; i++)
         this->elements[i] = elements[i];
 }
 
-template<FloatType N> Matrix4<N> Matrix4<N>::EmptyMatrix() {
+template<FloatType N> 
+Matrix4<N> Matrix4<N>::EmptyMatrix() {
     N elements[MatrixDimension * MatrixDimension] = {
         0.0, 0.0, 0.0, 0.0,
         0.0, 0.0, 0.0, 0.0,
@@ -16,7 +18,8 @@ template<FloatType N> Matrix4<N> Matrix4<N>::EmptyMatrix() {
     return Matrix4<N>(elements);
 }
 
-template<FloatType N> Matrix4<N> Matrix4<N>::IdentityMatrix() {
+template<FloatType N> 
+Matrix4<N> Matrix4<N>::IdentityMatrix() {
     N elements[MatrixDimension * MatrixDimension] = {
         1.0, 0.0, 0.0, 0.0,
         0.0, 1.0, 0.0, 0.0,
@@ -27,7 +30,8 @@ template<FloatType N> Matrix4<N> Matrix4<N>::IdentityMatrix() {
     return Matrix4<N>(elements);
 }
 
-template<FloatType N> Matrix4<N> Matrix4<N>::TranslationMatrix(Vector3<N> &translation) {
+template<FloatType N> 
+Matrix4<N> Matrix4<N>::TranslationMatrix(Vector3<N> &translation) {
     N elements[MatrixDimension * MatrixDimension] = {
         1.0, 0.0, 0.0, translation.GetX(),
         0.0, 1.0, 0.0, translation.GetY(),
@@ -38,8 +42,9 @@ template<FloatType N> Matrix4<N> Matrix4<N>::TranslationMatrix(Vector3<N> &trans
     return Matrix4<N>(elements);
 }
 
-template<FloatType N> Matrix4<N> Matrix4<N>::XRotationMatrix(Degree<N> angle) {
-    float elements[MatrixDimension * MatrixDimension] = {
+template<FloatType N> 
+Matrix4<N> Matrix4<N>::XRotationMatrix(Degree<N> angle) {
+    N elements[MatrixDimension * MatrixDimension] = {
         1.0, 0.0, 0.0, 0.0,
         0.0, (N)cos(angle.ToRadian()), (N)-sin(angle.ToRadian()), 0.0,
         0.0, (N)sin(angle.ToRadian()), (N)cos(angle.ToRadian()), 0.0,
@@ -49,8 +54,9 @@ template<FloatType N> Matrix4<N> Matrix4<N>::XRotationMatrix(Degree<N> angle) {
     return Matrix4<N>(elements);
 }
 
-template<FloatType N> Matrix4<N> Matrix4<N>::YRotationMatrix(Degree<N> angle) {
-    float elements[MatrixDimension * MatrixDimension] = {
+template<FloatType N> 
+Matrix4<N> Matrix4<N>::YRotationMatrix(Degree<N> angle) {
+    N elements[MatrixDimension * MatrixDimension] = {
         (N)cos(angle.ToRadian()), 0.0, (N)sin(angle.ToRadian()), 0.0,
         0.0, 1.0, 0.0, 0.0,
         (N)-sin(angle.ToRadian()), 0.0, (N)cos(angle.ToRadian()), 0.0,
@@ -60,8 +66,9 @@ template<FloatType N> Matrix4<N> Matrix4<N>::YRotationMatrix(Degree<N> angle) {
     return Matrix4<N>(elements);
 }
 
-template<FloatType N> Matrix4<N> Matrix4<N>::ZRotationMatrix(Degree<N> angle) {
-    float elements[MatrixDimension * MatrixDimension] = {
+template<FloatType N> 
+Matrix4<N> Matrix4<N>::ZRotationMatrix(Degree<N> angle) {
+    N elements[MatrixDimension * MatrixDimension] = {
         (N)cos(angle.ToRadian()), (N)-sin(angle.ToRadian()), 0.0, 0.0,
         (N)sin(angle.ToRadian()), (N)cos(angle.ToRadian()), 0.0, 0.0,
         0.0, 0.0, 1.0, 0.0,
@@ -71,7 +78,8 @@ template<FloatType N> Matrix4<N> Matrix4<N>::ZRotationMatrix(Degree<N> angle) {
     return Matrix4<N>(elements);
 }
 
-template<FloatType N> Matrix4<N> Matrix4<N>::ProjectionMatrix(N near_distance, N far_distance, N fov) {
+template<FloatType N> 
+Matrix4<N> Matrix4<N>::ProjectionMatrix(N near_distance, N far_distance, N fov) {
     N scale = 1.0 / (tan((fov / 2.0f) * ((N)M_PI / 180.0)));
     N elements[MatrixDimension * MatrixDimension] = {
         scale, 0.0, 0.0, 0.0,
@@ -83,7 +91,8 @@ template<FloatType N> Matrix4<N> Matrix4<N>::ProjectionMatrix(N near_distance, N
     return Matrix4<N>(elements);
 }
 
-template<FloatType N> Matrix4<N> Matrix4<N>::operator*(Matrix4<N> other) {
+template<FloatType N> 
+Matrix4<N> Matrix4<N>::operator*(Matrix4<N> other) {
     auto product = EmptyMatrix();
 
     for (uint8_t this_row = 0; this_row < MatrixDimension; this_row++) {
@@ -101,8 +110,9 @@ template<FloatType N> Matrix4<N> Matrix4<N>::operator*(Matrix4<N> other) {
     return product;
 }
 
-template<FloatType N>Vector3<N> Matrix4<N>::operator*(Vector3<N> other) {
-    N vector_data[MatrixDimension] { other.GetX(), other.GetY(), other.GetZ(), 1.0 };
+template<FloatType N>
+Vector4<N> Matrix4<N>::operator*(Vector4<N> other) {
+    N vector_data[MatrixDimension] { other.GetX(), other.GetY(), other.GetZ(), other.GetW() };
     N product_vector_data[MatrixDimension] { 0.0, 0.0, 0.0, 0.0 };
 
     for (uint8_t this_row = 0; this_row < MatrixDimension; this_row++) {
@@ -113,14 +123,16 @@ template<FloatType N>Vector3<N> Matrix4<N>::operator*(Vector3<N> other) {
         }
     }
 
-    return Vector3<N>(product_vector_data[0], product_vector_data[1], product_vector_data[2]);
+    return Vector4<N>(product_vector_data[0], product_vector_data[1], product_vector_data[2], product_vector_data[3]);
 }
 
-template<FloatType N> N Matrix4<N>::operator[](uint8_t index) {
+template<FloatType N> 
+N Matrix4<N>::operator[](uint8_t index) {
     return elements[index];
 }
 
-template<FloatType N> bool Matrix4<N>::operator==(Matrix4<N> other) {
+template<FloatType N> 
+bool Matrix4<N>::operator==(Matrix4<N> other) {
     for (uint8_t i = 0; i < MatrixDimension * MatrixDimension; i++) {
         if (elements[i] != other[i])
             return false;
@@ -130,3 +142,4 @@ template<FloatType N> bool Matrix4<N>::operator==(Matrix4<N> other) {
 }
 
 template class Matrix4<float>;
+template class Matrix4<double>;

@@ -2,7 +2,7 @@
 
 #include <stdint-gcc.h>
 #include <cmath>
-#include "Vector3.hpp"
+#include "Vector4.hpp"
 #include "Angle.hpp"
 
 constexpr uint8_t MatrixDimension = 4;
@@ -27,9 +27,10 @@ public:
     static Matrix4<N> ProjectionMatrix(N near_distance, N far_distance, N fov);
 
     Matrix4<N> operator *(Matrix4<N> other);
-    Vector3<N> operator *(Vector3<N> other);
+    Vector4<N> operator *(Vector4<N> other);
     N operator[](uint8_t index);
     bool operator==(Matrix4<N> other);
 };
 
 typedef Matrix4<float> Matrix4F;
+typedef Matrix4<double> Matrix4D;

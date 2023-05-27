@@ -1,42 +1,59 @@
 #include "Vector3.hpp"
 
-template<FloatType N> N Vector3<N>::DotProduct(Vector3<N> other) {
-    N dot_product((this->GetX() * other.GetX()) + (this->GetY() * other.GetY()) + (this->GetZ() * other.GetZ()));
+template<FloatType N> 
+N Vector3<N>::DotProduct(Vector3<N> other) {
+    N dot_product = (this->x * other.x) + (this->y * other.y) + (this->z * other.z);
     return dot_product;
 }
 
-template<FloatType N> Vector3<N> Vector3<N>::operator-(Vector3<N> other) {
+template<FloatType N> 
+Vector3<N> Vector3<N>::operator-(Vector3<N> other) {
     return Vector3<N>(this->x - other.x, this->y - other.y, this->z - other.z);
 }
 
-template<FloatType N> void Vector3<N>::operator-=(Vector3<N> other) {
+template<FloatType N> 
+void Vector3<N>::operator-=(Vector3<N> other) {
     this->x -= other.x;
     this->y -= other.y;
     this->z -= other.z;
 }
 
-template<FloatType N> Vector3<N> Vector3<N>::operator+(Vector3<N> other) {
+template<FloatType N> 
+Vector3<N> Vector3<N>::operator+(Vector3<N> other) {
     return Vector3<N>(this->x + other.x, this->y + other.y, this->z + other.z);
 }
 
-template<FloatType N> void Vector3<N>::operator+=(Vector3<N> other) {
+template<FloatType N> 
+void Vector3<N>::operator+=(Vector3<N> other) {
     this->x += other.x;
     this->y += other.y;
     this->z += other.z;
 }
 
-template<FloatType N> Vector3<N> Vector3<N>::operator*(N factor) {
-    return Vector3<N>(this->x == 0 ? 0 : this->x * factor, this->y == 0 ? 0 : this->y * factor, this->z == 0 ? 0 : this->z * factor);
+template<FloatType N> 
+Vector3<N> Vector3<N>::operator*(N factor) {
+    return Vector3<N>(this->x * factor, this->y * factor, this->z * factor);
 }
 
-template<FloatType N> void Vector3<N>::operator*=(N factor) {
+template<FloatType N> 
+void Vector3<N>::operator*=(N factor) {
     this->x *= factor;
     this->y *= factor;
     this->z *= factor;
 }
 
-template<FloatType N> bool Vector3<N>::operator==(Vector3<N> other) {
+template<FloatType N> 
+bool Vector3<N>::operator==(Vector3<N> other) {
     return this->x == other.x && this->y == other.y && this->z == other.z;
 }
 
+template<FloatType N>
+template<FloatType M>
+Vector3<N>::operator Vector3<M>() {
+    return Vector3<M>(this->x, this->y, this->z);
+}
+
 template class Vector3<float>;
+template class Vector3<double>;
+template Vector3<double>::operator Vector3<float>();
+template Vector3<float>::operator Vector3<double>();
