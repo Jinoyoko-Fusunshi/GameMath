@@ -2,6 +2,7 @@
 
 template<FloatType N> 
 N Vector3<N>::DotProduct(Vector3<N> other) {
+    N dot_product = (this->x * other.x) + (this->y * other.y) + (this->z * other.z);
     return dot_product;
 }
 

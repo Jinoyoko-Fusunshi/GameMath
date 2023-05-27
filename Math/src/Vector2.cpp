@@ -12,6 +12,12 @@ void Vector2<N>::operator-=(Vector2<N> other) {
 }
 
 template<FloatType N>
+N Vector2<N>::DotProduct(Vector2<N> other) {
+    N dot_product = (this->x * other.x) + (this->y * other.y);
+    return dot_product;
+}
+
+template<FloatType N>
 Vector2<N> Vector2<N>::operator+(Vector2<N> other) {
     return Vector2<N>(this->x + other.x, this->y + other.y);
 }

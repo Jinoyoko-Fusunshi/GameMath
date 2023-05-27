@@ -13,6 +13,8 @@ public:
     explicit Vector2(N x, N y) : x(x), y(y) {}
     ~Vector2() = default;
 
+    N DotProduct(Vector2<N> other);
+
     N GetX() const { return x; }
     N GetY() const { return y; }
 
